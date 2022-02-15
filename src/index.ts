@@ -31,6 +31,6 @@ bot.on('messageCreate', async (msg:any) => {
   }
 });
 
-bot.on('ready', () => console.log(bot.user.tag+' Esta Listo ugu');)
+bot.on('ready', () => console.log(bot.user.tag+' Esta Listo ugu'));
 
 bot.login(config.token); //El config esta en donde hosteo esto, solo hago un git pull y ya
