@@ -1,0 +1,19 @@
+{
+  "name": "prueba",
+  "version": "0.0.1",
+  "description": "literal no durara xd",
+  "main": "src",
+  "scripts": {
+    "test": "node js",
+    "dev": "tsc && node js"
+  },
+  "author": "ElPadrino711",
+  "license": "MIT",
+  "devDependencies": {
+    "node": "^17.4.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "discord.js": "^13.6.0",
+  }
+}
