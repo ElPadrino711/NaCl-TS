@@ -1,5 +1,7 @@
 // Asdfgh, nose
 import { Client, Collection, Intents } from 'discord.js';
+import config from './config';
+
 var bot:any = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
@@ -28,4 +30,4 @@ bot.on('messageCreate', async (msg:any) => {
   }
 });
 
-bot.login('tokenasibienrico')
+bot.login(config.token); //El config esta en donde hosteo esto, solo hago un git pull y ya
