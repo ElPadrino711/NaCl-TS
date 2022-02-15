@@ -8,6 +8,7 @@ var bot:any = new Client({
     Intents.FLAGS.GUILD_MESSAGES
   ]
 });
+
 bot.on('messageCreate', async (msg:any) => {
   if (msg.author.bot) return;
   if (!msg.guild) return;
@@ -29,5 +30,7 @@ bot.on('messageCreate', async (msg:any) => {
       break;
   }
 });
+
+bot.on('ready', () => console.log(bot.user.tag+' Esta Listo ugu');)
 
 bot.login(config.token); //El config esta en donde hosteo esto, solo hago un git pull y ya
