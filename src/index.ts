@@ -35,7 +35,7 @@ bot.on('messageCreate', async (msg:any) => {
   var args = msg.content.slice(prefix.length).trim().split(/ +/g);
   var cmd = args.shift().toLowerCase();
 
-  var CMD = bot.commands.find((c:any) => c.name == cmd || c.alias.includes(cmd));
+  var CMD = bot.commands.find((c:any) => c.help.name.includes(cmd));
   
   if (!CMD) return;
 
