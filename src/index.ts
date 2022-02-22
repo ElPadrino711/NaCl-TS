@@ -1,5 +1,5 @@
 // Asdfgh, nose
-import { Client, Collection, Intents } from 'discord.js';
+import { Client, Intents } from 'discord.js';
 import config from './config';
 
 var glob = require('glob');
@@ -11,7 +11,7 @@ var bot:any = new Client({
   ]
 });
 
-bot.commands = new Collection();
+bot.commands = new Map();
 
 glob.sync(path.join(__dirname,'cmds') + '/**/*.js').forEach((route:any) => {
   var file = require(route);
@@ -32,8 +32,8 @@ bot.on('messageCreate', async (msg:any) => {
   var prefix = 'h.';
   if (!msg.content.toLowerCase().startsWith(prefix)) return;
   
-  var args = msg.content.slice(prefix.length).trim().split(/ +/g);
-  var cmd = args.shift().toLowerCase();
+  var [cmd, ...args] = msg.content.slice(prefix.length).trim.split(/ +/g);
+  cmd = cmd.toLowerCase();
 
   var CMD = bot.commands.find((c:any) => c.help.name.includes(cmd));
   
