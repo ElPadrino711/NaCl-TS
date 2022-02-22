@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    token: process.env.token,
+    devs: ['728828371383091200', '847818806906847252']
+};

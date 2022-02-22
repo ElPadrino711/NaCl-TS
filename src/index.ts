@@ -1,5 +1,5 @@
 // Asdfgh, nose
-import { Client, Intents } from 'discord.js';
+import { Client, Collection, Intents } from 'discord.js';
 import config from './config';
 
 var glob = require('glob');
@@ -11,11 +11,11 @@ var bot:any = new Client({
   ]
 });
 
-bot.commands = new Map();
+bot.cmds = new Collection();
 
 glob.sync(path.join(__dirname,'cmds') + '/**/*.js').forEach((route:any) => {
   var file = require(route);
-  bot.commands.set(file.name, file);
+  bot.cmds.set(file.help.name[0], file);
 });
 
 var _data:any = {
@@ -32,10 +32,10 @@ bot.on('messageCreate', async (msg:any) => {
   var prefix = 'h.';
   if (!msg.content.toLowerCase().startsWith(prefix)) return;
   
-  var [cmd, ...args] = msg.content.slice(prefix.length).trim.split(/ +/g);
+  var [cmd, ...args] = msg.content.slice(prefix.length).trim().split(/ +/g);
   cmd = cmd.toLowerCase();
 
-  var CMD = bot.commands.find((c:any) => c.help.name.includes(cmd));
+  var CMD = bot.cmds.find((c:any) => c.help.name.includes(cmd));
   
   if (!CMD) return;
 
@@ -44,9 +44,9 @@ bot.on('messageCreate', async (msg:any) => {
   _data.guild = msg.guild;
   _data.author = msg.author;
   _data.member = msg.member;
-  _data.bot_member = msg.member.me;
+  _data.bot_member = msg.guild.me;
   _data.perms = msg.member.permissions.toArray();
-  _data.bot_perms = msg.member.me.permissions.toArray();
+  _data.bot_perms = msg.guild.me.permissions.toArray();
   _data.cmd = cmd;
   _data.command = CMD;
   _data.args = args;
@@ -60,6 +60,6 @@ bot.on('messageCreate', async (msg:any) => {
   };
 });
 
-bot.on('ready', () => console.log(bot.user.tag, 'Esta Listo ugu'));
+bot.on('ready', () => console.log(bot.user.tag, 'Esta Listo :D'));
 
-bot.login(config.token); //El config esta en donde hosteo esto, solo hago un git pull y ya
+bot.login(config.token); 
