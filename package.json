@@ -1,7 +1,7 @@
 {
-  "name": "prueba",
+  "name": "nacl-ts",
   "version": "0.0.1",
-  "description": "literal no durara xd",
+  "description": "bot epico, no dire mas",
   "main": "src",
   "scripts": {
     "test": "node js",
@@ -15,5 +15,6 @@
   },
   "dependencies": {
     "discord.js": "^13.6.0",
+    "glob": "^7.2.0"
   }
 }
