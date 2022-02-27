@@ -5,7 +5,7 @@
   "main": "src",
   "scripts": {
     "test": "node js",
-    "dev": "tsc && node js"
+    "dev": "tsc && node dist"
   },
   "author": "ElPadrino711",
   "license": "MIT",
