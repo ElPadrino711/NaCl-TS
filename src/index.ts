@@ -3,6 +3,7 @@ import { Client, Collection, Intents } from 'discord.js';
 import config from './config';
 import utils from './utils';
 
+var db = require('./db');
 var glob = require('glob');
 var path = require('path');
 var bot:any = new Client({
@@ -11,6 +12,21 @@ var bot:any = new Client({
     Intents.FLAGS.GUILD_MESSAGES
   ]
 });
+
+bot.db = {
+  set: (type:string, id:string , value:any ,table:string = 'main') => {
+		return db.set(table, type + '_' + id, value)
+	},
+	get: async(type:string, id:string, table:string = 'main') => {
+		return (await db.get(table, type + '_' + id))
+	},
+	delete: (type:string, id:string, table:string = 'main') => {
+		return db.delete(table, type + '_' + id)
+	},
+	all: async(table:string = 'main') => {
+		return (await db.all(table))
+	}
+};
 
 bot.cmds = new Collection();
 
@@ -27,11 +43,11 @@ var _data:any = {
 	utils: utils
 };
 
-bot.on('messageCreate', async (msg:any) => {
+bot.on('messageCreate', async(msg:any) => {
   if (msg.author.bot) return;
   if (!msg.guild) return;
 
-  var prefix = 'h.';
+  var prefix = await bot.db.get('prefix', msg.guild.id) || 'n.';
   if (!msg.content.toLowerCase().startsWith(prefix)) return;
   
   var [cmd, ...args] = msg.content.slice(prefix.length).trim().split(/ +/g);

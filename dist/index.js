@@ -43,6 +43,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = require("discord.js");
 var config_1 = __importDefault(require("./config"));
 var utils_1 = __importDefault(require("./utils"));
+var db = require('./db');
 var glob = require('glob');
 var path = require('path');
 var bot = new discord_js_1.Client({
@@ -51,6 +52,38 @@ var bot = new discord_js_1.Client({
         discord_js_1.Intents.FLAGS.GUILD_MESSAGES
     ]
 });
+bot.db = {
+    set: function (type, id, value, table) {
+        if (table === void 0) { table = 'main'; }
+        return db.set(table, type + '_' + id, value);
+    },
+    get: function (type, id, table) {
+        if (table === void 0) { table = 'main'; }
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, db.get(table, type + '_' + id)];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                }
+            });
+        });
+    },
+    delete: function (type, id, table) {
+        if (table === void 0) { table = 'main'; }
+        return db.delete(table, type + '_' + id);
+    },
+    all: function (table) {
+        if (table === void 0) { table = 'main'; }
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, db.all(table)];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                }
+            });
+        });
+    }
+};
 bot.cmds = new discord_js_1.Collection();
 glob.sync(path.join(__dirname, 'cmds') + '/**/*.js').forEach(function (route) {
     var file = require(route);
@@ -66,39 +99,44 @@ var _data = {
 bot.on('messageCreate', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
     var prefix, _a, cmd, args, CMD;
     return __generator(this, function (_b) {
-        if (msg.author.bot)
-            return [2 /*return*/];
-        if (!msg.guild)
-            return [2 /*return*/];
-        prefix = 'h.';
-        if (!msg.content.toLowerCase().startsWith(prefix))
-            return [2 /*return*/];
-        _a = msg.content.slice(prefix.length).trim().split(/ +/g), cmd = _a[0], args = _a.slice(1);
-        cmd = cmd.toLowerCase();
-        CMD = bot.cmds.find(function (c) { return c.help.name.includes(cmd); });
-        if (!CMD)
-            return [2 /*return*/];
-        _data.msg = msg;
-        _data.channel = msg.channel;
-        _data.guild = msg.guild;
-        _data.author = msg.author;
-        _data.member = msg.member;
-        _data.bot_member = msg.guild.me;
-        _data.perms = msg.member.permissions.toArray();
-        _data.bot_perms = msg.guild.me.permissions.toArray();
-        _data.cmd = cmd;
-        _data.command = CMD;
-        _data.args = args;
-        _data.args_string = args.join(' ');
-        _data.test = 'Prueba Xddd';
-        try {
-            CMD.run(_data);
+        switch (_b.label) {
+            case 0:
+                if (msg.author.bot)
+                    return [2 /*return*/];
+                if (!msg.guild)
+                    return [2 /*return*/];
+                return [4 /*yield*/, bot.db.get('prefix', msg.guild.id)];
+            case 1:
+                prefix = (_b.sent()) || 'n.';
+                if (!msg.content.toLowerCase().startsWith(prefix))
+                    return [2 /*return*/];
+                _a = msg.content.slice(prefix.length).trim().split(/ +/g), cmd = _a[0], args = _a.slice(1);
+                cmd = cmd.toLowerCase();
+                CMD = bot.cmds.find(function (c) { return c.help.name.includes(cmd); });
+                if (!CMD)
+                    return [2 /*return*/];
+                _data.msg = msg;
+                _data.channel = msg.channel;
+                _data.guild = msg.guild;
+                _data.author = msg.author;
+                _data.member = msg.member;
+                _data.bot_member = msg.guild.me;
+                _data.perms = msg.member.permissions.toArray();
+                _data.bot_perms = msg.guild.me.permissions.toArray();
+                _data.cmd = cmd;
+                _data.command = CMD;
+                _data.args = args;
+                _data.args_string = args.join(' ');
+                _data.test = 'Prueba Xddd';
+                try {
+                    CMD.run(_data);
+                }
+                catch (e) {
+                    console.log('>> Ocurrio un error\n', e);
+                }
+                ;
+                return [2 /*return*/];
         }
-        catch (e) {
-            console.log('>> Ocurrio un error\n', e);
-        }
-        ;
-        return [2 /*return*/];
     });
 }); });
 bot.on('ready', function () { return console.log(bot.user.tag, 'Esta Listo :D'); });
