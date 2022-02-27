@@ -1,6 +1,7 @@
 // Asdfgh, nose
 import { Client, Collection, Intents } from 'discord.js';
 import config from './config';
+import utils from './utils';
 
 var glob = require('glob');
 var path = require('path');
@@ -22,7 +23,8 @@ var _data:any = {
   bot: bot,
   glob: glob,
   path: path,
-  config: config
+  config: config,
+	utils: utils
 };
 
 bot.on('messageCreate', async (msg:any) => {
@@ -40,7 +42,7 @@ bot.on('messageCreate', async (msg:any) => {
   if (!CMD) return;
 
   _data.msg = msg;
-  _data.chanmel = msg.channel;
+  _data.channel = msg.channel;
   _data.guild = msg.guild;
   _data.author = msg.author;
   _data.member = msg.member;

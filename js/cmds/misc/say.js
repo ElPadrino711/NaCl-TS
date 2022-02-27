@@ -35,71 +35,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-// Asdfgh, nose
-var discord_js_1 = require("discord.js");
-var config_1 = __importDefault(require("./config"));
-var utils_1 = __importDefault(require("./utils"));
-var glob = require('glob');
-var path = require('path');
-var bot = new discord_js_1.Client({
-    intents: [
-        discord_js_1.Intents.FLAGS.GUILDS,
-        discord_js_1.Intents.FLAGS.GUILD_MESSAGES
-    ]
-});
-bot.cmds = new discord_js_1.Collection();
-glob.sync(path.join(__dirname, 'cmds') + '/**/*.js').forEach(function (route) {
-    var file = require(route);
-    bot.cmds.set(file.help.name[0], file);
-});
-var _data = {
-    bot: bot,
-    glob: glob,
-    path: path,
-    config: config_1.default,
-    utils: utils_1.default
-};
-bot.on('messageCreate', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
-    var prefix, _a, cmd, args, CMD;
-    return __generator(this, function (_b) {
-        if (msg.author.bot)
-            return [2 /*return*/];
-        if (!msg.guild)
-            return [2 /*return*/];
-        prefix = 'h.';
-        if (!msg.content.toLowerCase().startsWith(prefix))
-            return [2 /*return*/];
-        _a = msg.content.slice(prefix.length).trim().split(/ +/g), cmd = _a[0], args = _a.slice(1);
-        cmd = cmd.toLowerCase();
-        CMD = bot.cmds.find(function (c) { return c.help.name.includes(cmd); });
-        if (!CMD)
-            return [2 /*return*/];
-        _data.msg = msg;
-        _data.channel = msg.channel;
-        _data.guild = msg.guild;
-        _data.author = msg.author;
-        _data.member = msg.member;
-        _data.bot_member = msg.guild.me;
-        _data.perms = msg.member.permissions.toArray();
-        _data.bot_perms = msg.guild.me.permissions.toArray();
-        _data.cmd = cmd;
-        _data.command = CMD;
-        _data.args = args;
-        _data.args_string = args.join(' ');
-        _data.test = 'Prueba Xddd';
-        try {
-            CMD.run(_data);
+module.exports.run = function (d) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        if (!d.args_string) {
+            return [2 /*return*/, d.msg.reply('nomames')];
         }
-        catch (e) {
-            console.log('>> Ocurrio un error\n', e);
-        }
-        ;
+        d.embed = {
+            author: { name: d.author.tag, icon_url: d.author.avatarURL({ dynamic: true }) },
+            color: d.member.displayHexColor,
+            description: d.args_string.replace('@', '*'),
+            timestamp: new Date()
+        };
+        d.channel.send({ embeds: [d.embed] });
         return [2 /*return*/];
     });
-}); });
-bot.on('ready', function () { return console.log(bot.user.tag, 'Esta Listo :D'); });
-bot.login(config_1.default.token);
+}); };
+module.exports.help = {
+    name: ['say'],
+    category: ['misc', 'miscelaneo', 'misceláneo'],
+    desc: 'Comando de say, en embed',
+    usage: '?say <Texto>'
+};
