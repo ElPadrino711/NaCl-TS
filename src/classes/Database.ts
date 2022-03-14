@@ -23,7 +23,7 @@ export class nDB{
 
 	set(k:string,v:any){
 		this.storage[k]=v
-    this.sync()
+		this.sync()
 	}
 	
 	has(k:string){
