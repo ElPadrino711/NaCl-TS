@@ -18,8 +18,8 @@ export class nDB{
 			_fs.writeFileSync(this.path,JSON.stringify(this.storage,null,2))
 		}catch(err){
 			return console.log('> [DB error]:\n',err)
-     }
-  }
+		}
+	}
 
 	set(k:string,v:any){
 		this.storage[k]=v
