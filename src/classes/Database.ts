@@ -1,12 +1,11 @@
-var _fs=require('fs'),
-	_path=require('path')
+var _fs=require('fs'),_path=require('path')
 	
-export class nDB {
+export class nDB{
 	path:string
 	storage:any
 	
-	constructor(fp:string){
-		this.path=_path.join(__dirname,fp)
+	constructor(f:string){
+		this.path=_path.join(__dirname,f)
 
 		let data:any=_fs.readFileSync(this.path)
 		this.storage=JSON.parse(data)
@@ -27,11 +26,15 @@ export class nDB {
     this.sync()
 	}
 	
-	get(k:string){
-		return this.storage.hasOwnProperty(k)?this.storage[k]:undefined
-	}
-	
 	has(k:string){
 		return this.storage.hasOwnProperty(k)
+	}
+
+	get(k:string){
+		return this.has(k)&&this.storage[k]
+	}
+
+	delete(k:string){
+		this.has(k)&&delete this.storage[k]
 	}
 }
