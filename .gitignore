@@ -1,2 +1,4 @@
+/dist/
+/database/
 /package-lock.json
-/database/ 
+/db.json

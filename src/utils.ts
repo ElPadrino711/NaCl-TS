@@ -1,12 +1,3 @@
-var makeError = (d:any, type:string, desc:string, color:string = '#C70000', tmb:any = d.bot.user.avatarURL({ size: 4096 })) => {
-	return {
-		author: { name: `>>  Error  ||  ${type}`, icon_url: 'https://cdn.discordapp.com/emojis/945621456216264724.gif' },
-		thumbnail: { url: tmb },
-		color: color,
-		description: `\`\`\`js\n'${desc}'\n\`\`\``
-	}
-};
-
 var randomNumber = (max:number, min:number, decimals:boolean) => decimals ? Math.random() * (max - min) + min : Math.round(Math.random() * (max-min)) + min
 
 
@@ -51,4 +42,4 @@ var findMember = async(d:any, member:any, guild:any = d.guild) => {
     (await guild.members.cache.find((x:any) => x.user.username.toLowerCase() == m || x.user.tag.toLowerCase() == m || x.user.id === m) || d.msg.mentions.members.first() );
   }
 
-export default { makeError, randomNumber, randomString, color, findUser, findMember }
+export default { randomNumber, randomString, color, findUser, findMember }
