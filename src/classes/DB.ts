@@ -43,7 +43,7 @@ export class nDB{
 		var [...keys]=k.split('.')
 		var obj:any=this.data
 		
-	  for(var key of keys){
+		for(var key of keys){
 			if(!obj.has(key))return undefined
 			if(key==keys[keys.length-1])return obj[key]
 			else obj=obj[key]
