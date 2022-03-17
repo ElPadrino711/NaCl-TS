@@ -4,7 +4,7 @@ module.exports=async(bot:any,msg:any)=>{
 	if(msg.author.bot)return
 	if(!msg.guild)return
 
-	prefixes=[bot.db.get(`guild_${msg.guild.id}.refix`) || 'n.','nacl',`<@${bot.user.id}>`,`<@!${bot.user.id}>`]
+	prefixes=['n.','nacl',`<@${bot.user.id}>`,`<@!${bot.user.id}>`]
 	prefix=prefixes.find((p:string)=>msg.content.tlc().startsWith(p))
 	if(!prefix)return
 	

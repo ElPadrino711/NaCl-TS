@@ -1,17 +1,34 @@
 // Imports / Vars
 import{NaCl}from'./classes/Client'
-var bot:any=new NaCl()
+import web from'./web/index'
 
-// Things
-bot.connect(process.env.token)
-bot.loadCmds()
-bot.loadEvents(bot)
+var bot = new NaCl()
+
+web.connect()
+bot.connect()
+
+export default bot
 
 // Prototypes (i will use a handler later)
 declare global{
   interface String{
     tlc(): string
   }
+	interface Object{
+		has(k:string): any
+	}
 }
 
-String.prototype.tlc=function(){return this.toLowerCase()}
+String.prototype.tlc=function(){
+	return this.toLowerCase()
+}
+
+Object.prototype.has=function(k:string){
+	var r:boolean
+	try{
+		r=this.hasOwnProperty(k)
+	}catch{
+		r=false
+	}
+	return r
+}

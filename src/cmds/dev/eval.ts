@@ -1,3 +1,4 @@
+
 var {create}=require('sourcebin')
 
 exports.run=async(d:any)=>{
@@ -18,7 +19,7 @@ var embeds:any=[]
 	}catch(err:any){
 		embeds.push({title: 'Error',fields: [{name:'entrada',value:`\`\`\`js\n${d.args_str}\n\`\`\``},{name:'salida',value:`\`\`\`\n${evaluado}\n\`\`\``},{name:'error',value:`\`\`\`\n${err.message}\n\`\`\``}]})
 
-		return d.channel.send({embeds:d.embeds})
+		return d.channel.send({embeds})
 	}
 
 	embeds.push({title: 'ebal',fields: [{name:'entrada',value:`\`\`\`js\n${d.args_str}\n\`\`\``},{name:'salida',value:`\`\`\`\n${evaluado}\n\`\`\``},{name:'tipo',value:`\`\`\`\n${tipo}\n\`\`\``}]})
