@@ -15,11 +15,18 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "@discordjs/opus": "^0.7.0",
+    "@discordjs/voice": "^0.8.0",
+    "@distube/soundcloud": "^1.1.0",
+    "@distube/spotify": "^1.2.1",
     "@types/express": "^4.17.13",
     "@types/glob": "^7.2.0",
     "discord.js": "^13.6.0",
+    "distube": "^3.3.2",
     "express": "^4.17.3",
+    "ffmpeg-static": "^5.0.0",
     "glob": "^7.2.0",
-    "sourcebin": "^4.3.5"
+    "sourcebin": "^4.3.5",
+    "tweetnacl": "^1.0.3"
   }
 }

@@ -1,22 +1,30 @@
-var prefixes:string[],prefix:any,command:any,cmd:string,args:string[]
-
 module.exports=async(bot:any,msg:any)=>{
+	/* Filter */
 	if(msg.author.bot)return
 	if(!msg.guild)return
 
-	prefixes=['n.','nacl',`<@${bot.user.id}>`,`<@!${bot.user.id}>`]
+	/* Vars */
+	var prefixes:string[],prefix:any,command:any,cmd:string,args:string[]
+
+	/* Prefixes */
+	prefixes=[bot.db.get('guilds', msg.guild.id+'.prefix') || 'n.','nacl',`<@${bot.user.id}>`,`<@!${bot.user.id}>`]
+
+	/* Prefix used */
 	prefix=prefixes.find((p:string)=>msg.content.tlc().startsWith(p))
 	if(!prefix)return
-	
+
+	/* Cmd | Args */
 	[cmd,...args]=msg.content.slice(prefix.length).trim().split(/ +/g)
 	cmd=cmd.tlc()
 
+	/* Command Handler */
 	command=bot.cmds.find((c:any)=>c.help.name.includes(cmd))
 
+	/* Filters */
 	if(!command) return
+	if(command.help.onlyDevs && !bot.devs.includes(msg.author.id)) return msg.reply(':x:  |  U can\'t use this command! (Only devs)').then((x:any) => setTimeout(() => x.delete(), 5000))
 
-	if(command.help.onlyDevs&&!bot.devs.includes(msg.author.id))return msg.reply(':x:  |  No puedes usar esto! (Solo devs)').then((x:any)=>setTimeout(()=>x.delete(),4000))
-	
+	/* Execute the cmd */
 	try{
 		command.run({
 			prefix,
@@ -34,7 +42,7 @@ module.exports=async(bot:any,msg:any)=>{
 			perms:msg.member.permissions.toArray(),
 			bot_perms:msg.guild.me.permissions.toArray()
 		})
-	}catch(err){
+	} catch(err) {
 		console.log('> [Client]: CMD Error\n',err)
 	}
 }

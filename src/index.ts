@@ -1,34 +1,38 @@
-// Imports / Vars
-import{NaCl}from'./classes/Client'
-import web from'./web/index'
-
+import { NaCl } from './Classes/Client'
+import express from 'express'
+var app = express()
 var bot = new NaCl()
 
-web.connect()
-bot.connect()
+app.get('/', async(req:any, res:any) => {
+	res.send(`
+<h1>${bot.user?.tag} - Asd</h1>
+`)
+})
 
-export default bot
+app.listen(3030)
+bot.start()
 
-// Prototypes (i will use a handler later)
+/* Prototypes, i will use a handler later */
+
 declare global{
-  interface String{
-    tlc(): string
-  }
+	interface String{
+		tlc(): string
+	}
 	interface Object{
 		has(k:string): any
 	}
 }
 
-String.prototype.tlc=function(){
+String.prototype.tlc = function() {
 	return this.toLowerCase()
 }
 
-Object.prototype.has=function(k:string){
+Object.prototype.has = function(k:string) {
 	var r:boolean
-	try{
-		r=this.hasOwnProperty(k)
-	}catch{
-		r=false
+	try {
+		r = this.hasOwnProperty(k)
+	} catch {
+		r = false
 	}
 	return r
 }
