@@ -1,17 +1,19 @@
 {
   "name": "nacl-ts",
   "version": "0.0.1",
-  "description": "bot epico, no dire mas",
+  "description": "bot epico, muy epico",
   "main": "src",
   "scripts": {
-    "test": "node js",
-    "dev": "tsc && node dist"
+    "build": "tsc",
+    "start": "node dist",
+    "clean": "rm -rf dist"
   },
   "author": "ElPadrino711",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^17.0.21",
     "node": "^17.4.0",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.2"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "@discordjs/voice": "^0.8.0",
     "@distube/soundcloud": "^1.1.0",
     "@distube/spotify": "^1.2.1",
+    "@distube/yt-dlp": "^1.0.2",
     "@types/express": "^4.17.13",
     "@types/glob": "^7.2.0",
     "discord.js": "^13.6.0",

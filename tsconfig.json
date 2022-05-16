@@ -5,8 +5,12 @@
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"moduleResolution": "node",
-		"strict": true,
 		"esModuleInterop": true,
-		"allowJs": true
-	}
+		"allowJs": true,
+		"skipLibCheck":true,
+		"skipDefaultLibCheck":true,
+		"resolveJsonModule": true
+	},
+	"include": ["src"],
+	"exclude": ["new-src", "node_modules", "dist"]
 }
