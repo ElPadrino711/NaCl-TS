@@ -1,7 +1,7 @@
 import * as djs from 'discord.js';
-import { Cmd } from '../../interfaces';
+import { cmd } from '../../interfaces';
 
-export var cmd: Cmd = {
+export var _cmd: cmd = {
 	data: {
 		names: ['avatar', 'pfp', 'av'],
 		category: ['misc', 'miscelaneo', 'misceláneo'],
@@ -11,7 +11,7 @@ export var cmd: Cmd = {
 		usage: 'avatar [user]'
 	},
 	async run(d) {
-		var user: djs.User | djs.ClientUser =
+		var usr: djs.User | djs.ClientUser =
 			(await d.msg.mentions.users.first()) ||
 			(await d.bot.users.cache.find(
 				(x: any) =>
@@ -23,13 +23,8 @@ export var cmd: Cmd = {
 				void 0;
 			})) ||
 			(await d.author);
-		var usr: any =
-			(await d.guild.members.cache.get(user.id)) ||
-			(await d.guild.members.fetch(user.id).catch((e: any) => {
-				void 0;
-			}));
 
-		var pfp = usr.avatarURL({ dynamic: !0, format: 'png' });
+		var pfp = usr.displayAvatarURL({ dynamic: !0, format: 'png' });
 
 		var embed: any = {
 			author: { name: `Avatar de ${usr.tag}` },

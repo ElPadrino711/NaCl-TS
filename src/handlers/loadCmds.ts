@@ -10,7 +10,7 @@ function loadCmd(dir: string, bot: NaCl) {
 		if (stat.isDirectory()) return loadCmd(join(dir, x), bot);
 
 		console.log(x, '- loaded');
-		bot.cmds.set(x, require(join(mdir, dir, x)).cmd);
+		bot.cmds.set(x, require(join(mdir, dir, x))._cmd);
 	});
 }
 export function loadCmds(dir: string, bot: NaCl) {

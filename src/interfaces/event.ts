@@ -1,7 +1,7 @@
-import { NaCl } from '../structures'
-import { ClientEvents } from 'discord.js'
+import { NaCl } from '../structures';
 
-export interface Event{
-	name: keyof ClientEvents
-	run (bot: NaCl,...args:any[]) : void
+export interface event {
+	name: string;
+	distube?: boolean;
+	run(bot: NaCl, ...args: any[]): void;
 }

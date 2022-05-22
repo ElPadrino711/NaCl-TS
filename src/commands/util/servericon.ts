@@ -1,6 +1,6 @@
-import { Cmd } from '../../interfaces';
+import { cmd } from '../../interfaces';
 
-export var cmd: Cmd = {
+export var _cmd: cmd = {
 	data: {
 		names: ['server-icon', 'servericon', 'icon'],
 		category: ['misc', 'miscelaneo', 'misceláneo'],

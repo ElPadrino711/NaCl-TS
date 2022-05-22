@@ -7,10 +7,13 @@ var mdir: any = require?.main?.path;
 function loadEvent(dir: string, bot: NaCl) {
 	fs.readdirSync(path.join(mdir, dir)).forEach((x: string) => {
 		var stat = fs.lstatSync(path.join(mdir, dir, x));
-		if (!stat.isDirectory()) {
-			var { event } = require(path.join(mdir, dir, x));
-			bot.on(event.name, event.run.bind(null, bot));
-		} else loadEvent(path.join(dir, x), bot);
+		if (stat.isDirectory()) return loadEvent(path.join(dir, x), bot);
+		
+		var { _event } = require(path.join(mdir, dir, x));
+		
+		_event.distube
+			? bot.distube.on(_event.name, _event.run.bind(null, bot))
+			: bot.on(_event.name, _event.run.bind(null, bot))
 	});
 }
 

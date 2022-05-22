@@ -1,6 +1,6 @@
-import { Event } from '../interfaces';
+import { event } from '../interfaces';
 
-export var event: Event = {
+export var _event: event = {
 	name: 'messageCreate',
 	run: async (bot, msg) => {
 		if (msg.author.bot || !msg.guild) return;
@@ -39,7 +39,9 @@ export var event: Event = {
 				member: msg.member,
 				bot_member: msg.guild.me,
 				perms: msg.member.permissions.toArray(),
-				bot_perms: msg.guild.me.permissions.toArray()
+				bot_perms: msg.guild.me.permissions.toArray(),
+				dtb: bot.distube,
+				queue: bot.distube.getQueue(msg)
 			});
 		} catch (e) {
 			console.log(e);

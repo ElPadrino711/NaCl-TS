@@ -1,7 +1,7 @@
 import * as djs from 'discord.js';
-import { Cmd } from '../../interfaces';
+import { cmd } from '../../interfaces';
 
-export var cmd: Cmd = {
+export var _cmd: cmd = {
 	data: {
 		names: ['user', 'userinfo', 'user-info', 'whois', 'who-is'],
 		category: ['misc', 'miscelaneo', 'misceláneo'],

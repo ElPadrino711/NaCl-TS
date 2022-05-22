@@ -1,7 +1,7 @@
-import { Cmd } from '../../interfaces';
+import { cmd } from '../../interfaces';
 var { create } = require('sourcebin');
 
-export var cmd: Cmd = {
+export var _cmd: cmd = {
 	data: {
 		names: ['eval', 'test'],
 		category: ['dev'],

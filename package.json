@@ -25,7 +25,7 @@
     "@types/express": "^4.17.13",
     "@types/glob": "^7.2.0",
     "discord.js": "^13.6.0",
-    "distube": "^3.3.2",
+    "distube": "^3.3.4",
     "express": "^4.17.3",
     "ffmpeg-static": "^5.0.0",
     "glob": "^7.2.0",

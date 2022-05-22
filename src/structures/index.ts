@@ -1,1 +1,1 @@
-export {NaCl} from './client'
+export { NaCl } from './client';

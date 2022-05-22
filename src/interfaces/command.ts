@@ -1,4 +1,5 @@
 import * as djs from 'discord.js';
+import { DisTube, Queue } from 'distube';
 import { NaCl } from '../structures';
 
 interface data {
@@ -24,10 +25,11 @@ interface Run {
 	bot_member: djs.GuildMember;
 	perms: string[];
 	bot_perms: string[];
-	embed?: any
+	dtb: DisTube;
+	queue: Queue;
 }
 
-export interface Cmd {
+export interface cmd {
 	data: data;
 	run(d: Run): void;
 }
