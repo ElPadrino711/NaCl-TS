@@ -4,8 +4,8 @@ export var _event: event = {
 	name: 'messageCreate',
 	run: async (bot, msg) => {
 		if (msg.author.bot || !msg.guild) return;
-		var prefixes: string[] = [
-			'n.',
+		var prefixes: string[] | any = [
+			await bot.db.get('guilds', msg.guild.id + '.prefix') ?? 'n.',
 			'nacl',
 			`<@${bot.user.id}>`,
 			`<@!${bot.user.id}>`
@@ -25,6 +25,8 @@ export var _event: event = {
 		var CMD = bot.cmds.find(x => x.data.names.includes(cmd));
 		if (!CMD) return;
 
+		if (CMD.data?.onlyDevs && !bot.devs.includes(msg.author.id))
+			return msg.reply(':x:  **[ Solo los devs lo pueden usar ]**');
 		try {
 			CMD.run({
 				prefix,
@@ -41,7 +43,8 @@ export var _event: event = {
 				perms: msg.member.permissions.toArray(),
 				bot_perms: msg.guild.me.permissions.toArray(),
 				dtb: bot.distube,
-				queue: bot.distube.getQueue(msg)
+				queue: bot.distube.getQueue(msg),
+				db: bot.db
 			});
 		} catch (e) {
 			console.log(e);

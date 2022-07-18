@@ -11,11 +11,11 @@ export var _cmd: cmd = {
 	},
 	async run(d) {
 		if (!d.args[0]) return d.msg.reply('escribe algo bobo');
-		var x = d.msg.guild.me.permissions.has('MANAGE_MESSAGES');
+		var x = d.guild.me.permissions.has('MANAGE_MESSAGES');
 		if (d.args.includes('--embed')) {
 			d.args.splice(d.args.indexOf('--embed'), 1);
 			if (!d.args[0]) return d.msg.reply('escribe algo aparte del --embed');
-			return d.msg.channel
+			return d.channel
 				.send({
 					embeds: [
 						{
@@ -27,7 +27,7 @@ export var _cmd: cmd = {
 				})
 				.then(_ => x && d.msg.delete());
 		}
-		d.msg.channel.send(d.args.join(' '));
+		d.channel.send(d.args.join(' '));
 		x && d.msg.delete();
 	}
 };

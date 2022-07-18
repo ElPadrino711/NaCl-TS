@@ -67,9 +67,7 @@ export var _cmd: cmd = {
 				value: `**[ Nickname ] ::** ${usr.nickname ||
 					'Ninguno'}\n**[ Unido ] ::** <t:${Math.round(
 					usr.joinedTimestamp / 1000
-				)}:f>\n**[ Hex Color ] ::** ${usr.displayHexColor}\n**[ Roles (${
-					usr.roles.cache.size
-				}) ] ::** ${usr.roles.cache.map((x: any) => x.toString()).join('	')}`
+				)}:f>\n**[ Hex Color ] ::** ${usr.displayHexColor}\n**[ Rol mas alto ] ::** ${usr.roles.highest.toString()}`
 			});
 			embed.color = usr.displayHexColor;
 		}

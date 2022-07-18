@@ -3,7 +3,7 @@ var { create } = require('sourcebin');
 
 export var _cmd: cmd = {
 	data: {
-		names: ['eval', 'test'],
+		names: ['eval', 'e'],
 		category: ['dev'],
 		desc: 'Eval (devs onpy)',
 		inDev: false,
@@ -23,21 +23,19 @@ export var _cmd: cmd = {
 			args_str,
 			perms,
 			bot_perms,
-			bot_member
+			bot_member,
+			db,
+			guild
 		} = d;
 
 		if (!args_str) return msg.reply(':x: **[ Escribe algo para evaluar ]**');
 
-		var embed: any, evaled: any, type: string;
+		var embed: any, evaled: any = '', type: string;
 
 		try {
-			evaled = await eval(`(async()=>{${args_str}})()`);
+			evaled = await eval(`${d.args_str}`);
 			type = typeof evaled;
-			evaled =
-				(await require('util').inspect(evaled, { depth: 0 })) +
-				''
-					.replaceAll(bot.token, '[ToKeN]')
-					.replaceAll(process.env.mongo, '[ToKeN]');
+			evaled = String(await require('util').inspect(evaled, { depth: 0 }))
 		} catch (err) {
 			embed = {
 				title: 'Error',
@@ -65,7 +63,7 @@ export var _cmd: cmd = {
 				},
 				{
 					name: 'Salida',
-					value: `\`\`\`js\n${evaled}\n\`\`\``
+					value: `\`\`\`js\n${evaled}\n\`\`\``.replace(bot.token, '[ ToKeN ]')
 				},
 				{
 					name: 'Type',

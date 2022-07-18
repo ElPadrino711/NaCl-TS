@@ -9,6 +9,6 @@ export var _event: event = {
 			.get(q.textChannel.guildId)
 			.reply(
 				`Se agrego  **\`${s.name}\`**  (${s.formattedDuration}) a la lista.`
-			);
+			)
 	}
 };

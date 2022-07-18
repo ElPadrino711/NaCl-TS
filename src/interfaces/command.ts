@@ -1,4 +1,5 @@
 import * as djs from 'discord.js';
+import { Database } from '@kks717/db';
 import { DisTube, Queue } from 'distube';
 import { NaCl } from '../structures';
 
@@ -14,7 +15,7 @@ interface data {
 interface Run {
 	prefix: string;
 	cmd: string;
-	args: string[];
+	args: string[] | any;
 	bot: NaCl;
 	msg: djs.Message;
 	args_str: string;
@@ -27,6 +28,7 @@ interface Run {
 	bot_perms: string[];
 	dtb: DisTube;
 	queue: Queue;
+	db: Database;
 }
 
 export interface cmd {
