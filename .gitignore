@@ -1,5 +1,6 @@
-/dist/
-/database/
+/dist
+/database
 /package-lock.json
-/db.json
-/new-src
+/src
+/.env
+/.replit
