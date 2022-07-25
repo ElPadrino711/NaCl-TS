@@ -9,7 +9,7 @@ class cmd extends command {
 		onlyDevs: true,
 		usage: 'eval <Code>'
 	};
-	async run(d)  {
+	async run(d) {
 		var {
 			bot,
 			msg,
@@ -33,12 +33,12 @@ class cmd extends command {
 
 		try {
 			evaled = await eval(`${d.args_str}`);
-			type = typeof evaled;	 
-			if(type == 'function')
+			type = typeof evaled;
+			if (type == 'function')
 				evaled = evaled.toString()
 			else
 				evaled = await require('util').inspect(evaled, { depth: 0 })
-			
+
 		} catch (err) {
 			embed = {
 				title: 'Error',
@@ -66,12 +66,11 @@ class cmd extends command {
 				},
 				{
 					name: 'Salida',
-					value: '```js\n'+ evaled +'\n```'.replace(bot.token, '[ ToKeN ]')
+					value: '```js\n' + evaled + '\n```'.replace(bot.token, '[ ToKeN ]')
 				},
 				{
 					name: 'Type',
-					value: `\`\`\`\n${
-						type == 'string'
+					value: `\`\`\`\n${type == 'string'
 							? 'String'
 							: type == 'object'
 								? 'Object'
@@ -82,7 +81,7 @@ class cmd extends command {
 										: type == 'function'
 											? 'Function'
 											: 'undefined'
-					}\n\`\`\``
+						}\n\`\`\``
 				}
 			]
 		};
@@ -104,9 +103,9 @@ class cmd extends command {
 				name: 'Salida',
 				value: `Result >= 1024\n${sb.url}`
 			};
-		}
+		};
 		channel.send({ embeds: [embed] });
 	}
 };
 
-export default cmd
+export default cmd;

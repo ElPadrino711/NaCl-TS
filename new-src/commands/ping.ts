@@ -8,7 +8,7 @@ class cmd extends command {
 		usage: '!!ping'
 	};
 
-	async run(d: any) {
+	async run(d) {
 		d.channel.send('Mi ping es de ' + d.bot.ws.ping + ' :)')
 	}
 }

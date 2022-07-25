@@ -2,7 +2,7 @@
 import 'dotenv/config';
 
 // Bot default prefix
-var prefix: string = '!!'
+var prefix: string = '!!';
 
 // Bot token
 var token: string = process.env.TOKEN;
@@ -25,8 +25,8 @@ var bot = {
 	partials: [
 		'Channel'
 	],
-	allowedMentions: { 
-		repliedUser: !1 
+	allowedMentions: {
+		repliedUser: !1
 	},
 	presence: {
 		status: 'idle',
@@ -37,7 +37,7 @@ var bot = {
 				url: 'https://twitch.tv/el_padrino_717'
 			}
 		]
-	}			
+	}
 };
 
 export default {
@@ -46,4 +46,4 @@ export default {
 	devs,
 	token,
 	prefix
-}
+};

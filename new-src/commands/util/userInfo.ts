@@ -57,7 +57,7 @@ class cmd extends command {
 				}
 			],
 			thumbnail: {
-				url: user.displayAvatarURL({ dynamic: !0, format: 'png' })
+				url: user.displayAvatarURL({ extension: 'png' })
 			}
 		};
 		if (usr) {
@@ -74,3 +74,5 @@ class cmd extends command {
 		d.msg.reply({ embeds: [embed] });
 	}
 };
+
+export default cmd

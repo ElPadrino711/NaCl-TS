@@ -1,4 +1,3 @@
-import djs from 'discord.js'
 import command from '../../classes/commands';
 
 class cmd extends command {
@@ -10,7 +9,7 @@ class cmd extends command {
 	}
 	
 	async run(d) {
-		var icon: string = d.guild.iconURL({ dynamic: !0, format: 'png' });
+		var icon: string = d.guild.iconURL({ extension: 'png' });
 
 		if (!icon) return d.msg.reply(':x: **[ El servidor no tiene icono ]**');
 		var embed = {
